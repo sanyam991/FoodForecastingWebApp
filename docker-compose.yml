@@ -1,0 +1,40 @@
+# docker-compose.yml
+# This file defines and runs multi-container Docker applications.
+# It orchestrates the build and startup of both the React frontend and Spring Boot backend.
+version: '3.8' # Specifies the Docker Compose file format version.
+
+services:
+  # Service definition for the React frontend application.
+  frontend:
+    # Build the Docker image for the frontend using the Dockerfile in the './frontend' directory.
+    build:
+      context: ./frontend # Specifies the build context (directory containing the Dockerfile).
+      dockerfile: Dockerfile # Specifies the Dockerfile name within the context.
+    # Port mapping: maps host port 3000 to container port 80 (where Nginx serves the React app).
+    ports:
+      - "3000:80"
+    # Declares a dependency on the 'backend' service. This ensures the backend container
+    # starts before the frontend container.
+    depends_on:
+      - backend
+    # Restart policy: always restart the container if it stops.
+    restart: always
+
+  # Service definition for the Spring Boot backend application.
+  backend:
+    # Build the Docker image for the backend using the Dockerfile in the './backend' directory.
+    build:
+      context: ./backend # Specifies the build context.
+      dockerfile: Dockerfile # Specifies the Dockerfile name.
+    # Port mapping: maps host port 8080 to container port 8080 (where Spring Boot listens).
+    ports:
+      - "8080:8080"
+    # Restart policy: always restart the container if it stops.
+    restart: always
+    # Optional: Environment variables for the backend container.
+    # You can uncomment and configure these if your backend needs external configurations
+    # like database connection strings, API keys, etc.
+    # environment:
+    #   - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mydb
+    #   - SPRING_DATASOURCE_USERNAME=user
+    #   - SPRING_DATASOURCE_PASSWORD=password
