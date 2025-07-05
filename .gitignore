@@ -1,0 +1,31 @@
+# .gitignore
+# This file specifies intentionally untracked files that Git should ignore.
+# It helps keep your repository clean by not committing generated files,
+# temporary files, or sensitive information.
+
+# Node.js and Frontend specific ignores
+/frontend/node_modules
+/frontend/build
+/frontend/.env # Keep your API keys and sensitive environment variables out of version control
+.DS_Store # macOS specific ignore
+
+# Java and Backend specific ignores
+/backend/target/ # Maven build output directory
+/backend/.idea/ # IntelliJ IDEA project files
+/backend/.gradle/ # Gradle build directory (if using Gradle instead of Maven)
+*.iml # IntelliJ IDEA module files
+*.log # Log files
+*.class # Compiled Java class files
+.project
+.classpath
+.settings/
+/backend/src/main/resources/application-*.properties # Ignore specific application property files if they contain sensitive data
+
+# Docker specific ignores
+*.log
+.dockerignore
+
+# IDE specific ignores
+.vscode/ # VS Code specific files
+*.swp # Vim swap files
+*~ # Emacs backup files
